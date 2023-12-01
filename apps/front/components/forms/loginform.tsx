@@ -1,49 +1,70 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import BasicInput from './input';
+import { Button, Typography, Divider, Box, Link } from '@mui/material';
 import { BasicButton } from './Button';
 
 interface FormProps {
     variant: 'login' | 'signup';
-    onLogin: () => void;
-    onSignup: () => void;
+    onLogin?: () => void;
+    onSignup?: () => void;
 }
 
-export default function Form({ variant, onLogin, onSignup }: FormProps) {
+export default function LogForm({ variant, onLogin, onSignup }: FormProps) {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
+    const [formVariant, setFormVariant] = useState<'login' | 'signup'>('login');
+
+    const toggleFormVariant = () => {
+        setFormVariant(formVariant === 'login' ? 'signup' : 'login');
+    };
+
     const handleSubmit = () => {
-        if (variant === 'login') {
-            onLogin();
-        } else {
-            onSignup();
-        }
+        // faut implémenter la logique de soumission ici en fonction de la version du form
     };
 
     return (
-        <form>
+        <Box component="form"
+            display="flex"
+            flexDirection="column"
+            alignItems="start" 
+            justifyContent="space-around"
+        >
+            <Box mb={2}>
+                <Typography variant="h1">{variant === 'login' ? 'Connexion' : 'Inscription'}</Typography>
+                <Divider style={{ backgroundColor: 'primary.main' }} />
+            </Box>
+
             <BasicInput 
                 label="Email" 
                 forwardedRef={emailRef} 
-                variant="outlined" 
+                variant="outlined"
             />
             <BasicInput 
-                label="Password" 
+                label="Mot de passe" 
                 forwardedRef={passwordRef} 
-                variant="outlined" 
+                variant="outlined"
             />
             {variant === 'signup' && (
                 <BasicInput 
-                    label="Confirm Password" 
+                    label="Confirmation de mot de passe" 
                     forwardedRef={confirmPasswordRef} 
-                    variant="outlined" 
+                    variant="outlined"
                 />
+                
             )}
+
             <BasicButton 
-                buttonText={variant === 'login' ? 'Login' : 'Sign Up'} 
-                onClick={handleSubmit} 
+                buttonVariant="contained" 
+                buttonColor="primary" 
+                onClick={handleSubmit}
+                buttonText= {variant === 'login' ? 'Connexion' : 'Inscription'}
             />
-        </form>
+                
+          
+
+            
+        </Box>
     );
 }
