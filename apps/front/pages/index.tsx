@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { BasicButton } from '../components/forms/Button';
-import { Typography } from '@mui/material';
 
 const StyledPage = styled.div`
   .page {
@@ -8,11 +6,7 @@ const StyledPage = styled.div`
 `;
 
 export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.@emotion/styled file.
-   */
+  
   return (
     <StyledPage>
       <div className="wrapper">

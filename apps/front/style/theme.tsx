@@ -28,5 +28,8 @@ export const theme = createTheme({
             fontWeight: 400,
             color: 'rgba(0, 0, 0, 0.87)',
         },
+        h6: {
+            fontSize: '1rem'
+        }
     },
 });
