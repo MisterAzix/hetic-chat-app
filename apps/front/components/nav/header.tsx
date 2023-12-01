@@ -61,7 +61,6 @@ export default function DrawerAppBar() {
       </List>
     </Box>
   );
-  const drawerContent = auth ? <AlignItemsList /> : null;
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -125,7 +124,8 @@ export default function DrawerAppBar() {
           )}
         </Toolbar>
       </AppBar>
-      <nav>
+      {auth &&(
+        <nav>
         <Drawer
           variant="permanent"
           sx={{
@@ -134,7 +134,7 @@ export default function DrawerAppBar() {
           }}
           open
         >
-          {drawerContent}
+          <AlignItemsList/>
         </Drawer>
         <Drawer
           variant="temporary"
@@ -146,13 +146,10 @@ export default function DrawerAppBar() {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
-          {drawerContent}
+          <AlignItemsList/>
         </Drawer>
       </nav>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-        {/* Contenu principal ici */}
-      </Box>
+      )}
     </Box>
   );
 }
