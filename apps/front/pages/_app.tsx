@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
-import { BasicButton } from '../components/Button';
+import { BasicButton } from '../components/forms/Button';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../style/theme';
 
