@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { BasicButton } from '../components/Button';
 
 const StyledPage = styled.div`
   .page {
@@ -20,6 +21,7 @@ export function Index() {
               <span> Hello there, </span>
               Welcome front 👋
             </h1>
+            
           </div>
 
           <div id="hero" className="rounded">
