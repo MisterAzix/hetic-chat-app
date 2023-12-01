@@ -2,12 +2,17 @@
   "name": "@org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "lint": "nx run-many --all --target=lint --maxWarnings=0",
+    "build": "npx nx run-many --all --target=build --parallel --with-deps"
+  },
   "private": true,
   "dependencies": {
-    "@emotion/react": "11.11.1",
+    "@emotion/react": "^11.11.1",
     "@emotion/server": "11.11.0",
-    "@emotion/styled": "11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.19",
     "@nestjs/common": "^10.0.2",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
