@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import LogForm from '../components/forms/loginform';
 
 const StyledPage = styled.div`
   .page {
@@ -7,7 +6,6 @@ const StyledPage = styled.div`
 `;
 
 export function Index() {
-  
   return (
     <StyledPage>
       <div className="wrapper">
@@ -17,9 +15,7 @@ export function Index() {
               <span> Hello there, </span>
               Welcome front 👋
             </h1>
-            
           </div>
-
 
           <div id="hero" className="rounded">
             <div className="text-container">
