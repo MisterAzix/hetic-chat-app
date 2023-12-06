@@ -49,7 +49,6 @@ export default function ChatBox() {
                     chat='yes'
                     disabled={inputValue.trim() === ''} // Passer l'état disabled basé sur la valeur de l'input
                 />
-
             </Box>
         </Box>
     );
