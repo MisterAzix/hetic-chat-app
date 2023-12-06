@@ -18,7 +18,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import AlignItemsList from './userlist';
+import MessagesList from './userlist';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -117,8 +117,8 @@ export default function DrawerAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Profil</MenuItem>
+                <MenuItem onClick={handleClose}>Mon compte</MenuItem>
               </Menu>
             </div>
           )}
@@ -134,7 +134,7 @@ export default function DrawerAppBar() {
           }}
           open
         >
-          <AlignItemsList/>
+          <MessagesList/>
         </Drawer>
         <Drawer
           variant="temporary"
@@ -146,7 +146,7 @@ export default function DrawerAppBar() {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
-          <AlignItemsList/>
+          <MessagesList/>
         </Drawer>
       </nav>
       )}

@@ -11,7 +11,7 @@ export default function BasicInput(props: BasicInputProps) {
   return (
     <TextField
       className="standard-basic"
-      label={props.label}
+      label={props.label !== '' ? props.label : undefined}
       variant={props.variant || 'standard'}
       inputRef={props.forwardedRef}
     />

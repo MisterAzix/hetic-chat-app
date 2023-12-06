@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-
+import ChatBox from '../components/chat/ChatBox';
 const StyledPage = styled.div`
   .page {
   }
@@ -16,7 +16,7 @@ export function Index() {
               Welcome front 👋
             </h1>
           </div>
-
+          <ChatBox/>
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>
