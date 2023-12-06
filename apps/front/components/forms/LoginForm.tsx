@@ -14,6 +14,10 @@ export default function LoginForm({ variant, onLogin, onSignup }: FormProps) {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const [formVariant, setFormVariant] = useState<'login' | 'signup'>('login');
 
   const toggleFormVariant = () => {
@@ -32,33 +36,31 @@ export default function LoginForm({ variant, onLogin, onSignup }: FormProps) {
       alignItems="start"
       justifyContent="space-around"
     >
-      <Box mb={2}>
-        <Typography variant="h1">
-          {variant === 'login' ? 'Connexion' : 'Inscription'}
-        </Typography>
-        <Divider style={{ backgroundColor: 'primary.main' }} />
-      </Box>
-
-      <BasicInput label="Email" forwardedRef={emailRef} variant="outlined" />
+      {/* ... autres éléments */}
+      <BasicInput
+        label="Email"
+        forwardedRef={emailRef}
+        variant="outlined"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <BasicInput
         label="Mot de passe"
         forwardedRef={passwordRef}
         variant="outlined"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
       {variant === 'signup' && (
         <BasicInput
           label="Confirmation de mot de passe"
           forwardedRef={confirmPasswordRef}
           variant="outlined"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       )}
-
-      <BasicButton
-        buttonVariant="contained"
-        buttonColor="primary"
-        onClick={handleSubmit}
-        buttonText={variant === 'login' ? 'Connexion' : 'Inscription'}
-      />
+      {/* ... autres éléments */}
     </Box>
   );
 }

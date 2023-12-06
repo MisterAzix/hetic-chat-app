@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { Box, Button } from '@mui/material';
 import BasicInput from '../forms/Input';
 import { useRef } from 'react';
@@ -11,28 +11,46 @@ export default function ChatBox() {
         { text: 'Voici un exemple de message.', user: 'user2', timestamp: new Date() },
         { text: 'Testons avec plusieurs messages.', user: 'user1', timestamp: new Date() }
     ]);
+    const [inputValue, setInputValue] = useState(''); 
 
     const inputRef = useRef<HTMLInputElement>(null);
     const sendMessage = () => {
-        if (inputRef.current) {
+        if (inputRef.current && inputRef.current.value.trim() !== '') { 
             setMessages([...messages, { text: inputRef.current.value, user: 'user2', timestamp: new Date() }]);
             inputRef.current.value = "";
+            setInputValue(''); 
         }
+    };
+
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => { 
+        setInputValue(event.target.value);
     };
 
     return (
         <Box>
             <Box sx={{ overflow: 'auto' }}>
-            {messages.map((message, index) => (
+                {messages.map((message, index) => (
                     <MessageItem text={message.text} user={message.user} timestamp={message.timestamp} key={index} />
                 ))}
             </Box>
-            <BasicInput
-                label=''
-                variant='outlined'
-                forwardedRef={inputRef}
-            />
-            <BasicButton buttonVariant='contained' buttonColor= 'primary' onClick={sendMessage} buttonText='Envoyer'/>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 2 }}>
+                <BasicInput
+                    label=''
+                    variant='outlined'
+                    forwardedRef={inputRef}
+                    
+                    value={inputValue}
+                    onChange={handleInputChange} 
+                />
+                <BasicButton
+                    buttonVariant='contained'
+                    buttonColor='primary'
+                    onClick={sendMessage}
+                    chat='yes'
+                    disabled={inputValue.trim() === ''} // Passer l'état disabled basé sur la valeur de l'input
+                />
+
+            </Box>
         </Box>
     );
 }

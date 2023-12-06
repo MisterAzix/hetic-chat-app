@@ -19,10 +19,10 @@ export default function PageConnexionInscription() {
       <LoginForm
         variant={formVariant}
         onLogin={() => {
-          /* Logique de connexion */
+          
         }}
         onSignup={() => {
-          /* Logique d'inscription */
+        
         }}
       />
       <Box mt={2}>
