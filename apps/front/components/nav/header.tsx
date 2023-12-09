@@ -18,22 +18,21 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import AlignItemsList from './userlist';
+import MessagesList from './userlist';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-export default function DrawerAppBar() {
+interface HeaderProps {
+  auth: boolean;
+}
+
+export default function DrawerAppBar({ auth }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [auth, setAuth] = React.useState(false); 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
   };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -78,18 +77,7 @@ export default function DrawerAppBar() {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Ami-es
           </Typography>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={auth}
-                  onChange={handleChange}
-                  aria-label="login switch"
-                />
-              }
-              label={auth ? 'Logout' : 'Login'}
-            />
-          </FormGroup>
+          
           {auth && (
             <div>
               <IconButton
@@ -117,8 +105,8 @@ export default function DrawerAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Profil</MenuItem>
+                <MenuItem onClick={handleClose}>Mon compte</MenuItem>
               </Menu>
             </div>
           )}
@@ -134,7 +122,7 @@ export default function DrawerAppBar() {
           }}
           open
         >
-          <AlignItemsList/>
+          <MessagesList/>
         </Drawer>
         <Drawer
           variant="temporary"
@@ -146,7 +134,7 @@ export default function DrawerAppBar() {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
-          <AlignItemsList/>
+          <MessagesList/>
         </Drawer>
       </nav>
       )}

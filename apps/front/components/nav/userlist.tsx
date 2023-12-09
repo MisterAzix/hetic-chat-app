@@ -10,7 +10,7 @@ import AvatarComponent from '../profile/pfp';
 
 
 
-export default function AlignItemsList() {
+export default function MessagesList() {
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background' }}>
       <ListItem alignItems="flex-start">
