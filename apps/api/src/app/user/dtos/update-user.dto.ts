@@ -1,17 +1,13 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
+import { User } from '@prisma/client';
 
-export class UpdateUserDto implements Omit<Prisma.UserUpdateInput, 'password'> {
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  name: string;
+export class UpdateUserDto {
+  fromDomain(user: User): Omit<User, 'password'> {
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    };
+  }
 }
