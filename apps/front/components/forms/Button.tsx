@@ -7,11 +7,13 @@ interface BasicButtonProps {
   onClick: () => void;
   buttonColor: 'primary' | 'secondary';
   chat: 'yes' | 'no';
-  disabled?: boolean; // Ajout de la propriété disabled
+  disabled?: boolean;
 }
 
 export function BasicButton(props: BasicButtonProps) {
   const { buttonText, buttonVariant, onClick, buttonColor, chat, disabled } = props;
+
+  const buttonContent = chat === 'yes' ? <SendIcon /> : buttonText;
 
   return (
     <Button
@@ -19,9 +21,9 @@ export function BasicButton(props: BasicButtonProps) {
       color={buttonColor}
       onClick={onClick}
       sx={{ color: 'white' }}
-      disabled={disabled} 
+      disabled={disabled}
     >
-      {chat === 'yes' ? <SendIcon /> : buttonText}
+      {buttonContent}
     </Button>
   );
 }

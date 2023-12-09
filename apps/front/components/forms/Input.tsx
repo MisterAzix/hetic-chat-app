@@ -10,6 +10,12 @@ interface BasicInputProps {
 }
 
 export default function BasicInput(props: BasicInputProps) {
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' && !event.shiftKey) { 
+        event.preventDefault(); 
+       
+    }
+};
   return (
     <TextField
       sx={{ flexGrow: 1, marginRight: 1 }} 

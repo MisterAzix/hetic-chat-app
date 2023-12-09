@@ -19,15 +19,16 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MessagesList from './userlist';
-
+import { useRef } from 'react';
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['Home'];
 
 interface HeaderProps {
   auth: boolean;
+  onProfileClick: () => void;
 }
 
-export default function DrawerAppBar({ auth }: HeaderProps) {
+export default function DrawerAppBar({ auth, onProfileClick }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -42,7 +43,8 @@ export default function DrawerAppBar({ auth }: HeaderProps) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const drawer = (
     <Box sx={{ width: drawerWidth, flexShrink: 0, textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -105,37 +107,26 @@ export default function DrawerAppBar({ auth }: HeaderProps) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profil</MenuItem>
-                <MenuItem onClick={handleClose}>Mon compte</MenuItem>
+                <MenuItem onClick={onProfileClick}>Profil</MenuItem>
               </Menu>
             </div>
           )}
         </Toolbar>
       </AppBar>
       {auth &&(
-        <nav>
+        <nav >
         <Drawer
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+
           }}
           open
         >
           <MessagesList/>
         </Drawer>
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{ keepMounted: true }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          <MessagesList/>
-        </Drawer>
+       
       </nav>
       )}
     </Box>
