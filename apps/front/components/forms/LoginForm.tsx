@@ -46,7 +46,8 @@ export default function LoginForm({ variant, onLogin, onSignup, onUpdate }: Form
       justifyContent="space-around"
       sx={{width:1, height:1}}
     >
-      { variant=== 'login' ? <Typography variant="h1">Connexion</Typography> : <Typography>Inscription</Typography>}
+      {variant === 'login' && (<Typography variant="h1">Connexion</Typography>)}
+      {variant === 'signup' && (<Typography variant="h1">Inscription</Typography>)}
       {variant === 'signup' || variant === 'update' && (
         <BasicInput
           label="Nom"
@@ -80,7 +81,7 @@ export default function LoginForm({ variant, onLogin, onSignup, onUpdate }: Form
         />
       )}
       {variant === 'login' && (
-        <Typography variant="body1">Pas de compte ?<span style={{ backgroundColor: 'yellow', cursor: 'pointer' }} onClick={toggleFormVariant}>Créez-en un</span></Typography>
+        <Typography variant="body1">Pas de compte ?<span onClick={toggleFormVariant}>Créez-en un</span></Typography>
       )
       }
       {variant === 'signup' && (
