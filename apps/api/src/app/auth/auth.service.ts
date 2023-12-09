@@ -25,7 +25,7 @@ export class AuthService {
 
   async register(
     registerData: Pick<User, 'email' | 'password'>
-  ): Promise<Omit<User, 'password'>> {
+  ): Promise<User> {
     const password = await bcrypt.hash(
       registerData.password,
       this.configService.get('PASSWORD_SALT_ROUND')
