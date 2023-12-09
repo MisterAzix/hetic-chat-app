@@ -1,22 +1,29 @@
 import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 interface BasicButtonProps {
-  buttonText: string;
-  buttonVariant: 'text' | 'outlined' | 'contained'; // Ajoutez les types de variant possibles ici
+  buttonText?: string;
+  buttonVariant: 'text' | 'outlined' | 'contained';
   onClick: () => void;
   buttonColor: 'primary' | 'secondary';
+  chat: 'yes' | 'no';
+  disabled?: boolean;
 }
 
 export function BasicButton(props: BasicButtonProps) {
+  const { buttonText, buttonVariant, onClick, buttonColor, chat, disabled } = props;
+
+  const buttonContent = chat === 'yes' ? <SendIcon /> : buttonText;
+
   return (
-    <>
-      <Button
-        variant={props.buttonVariant}
-        color={props.buttonColor}
-        onClick={props.onClick}
-      >
-        {props.buttonText}
-      </Button>
-    </>
+    <Button
+      variant={buttonVariant}
+      color={buttonColor}
+      onClick={onClick}
+      sx={{ color: 'white' }}
+      disabled={disabled}
+    >
+      {buttonContent}
+    </Button>
   );
 }

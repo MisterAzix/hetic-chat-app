@@ -13,6 +13,13 @@ body {
   margin: 0;
   padding-top:200px;
 }
+main{
+  padding-left:30%;
+  padding-top:10%;
+  display:flex;
+  justify-content:center;
+}
+
 h1,
 h2,
 p,
