@@ -59,7 +59,10 @@ export default function ProfilePage() {
       <Box 
         sx={{
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            width: '40%',
+            alignItems: 'center',
+            justifyContent: 'space-around'
         }}
       >
         <BasicButton 

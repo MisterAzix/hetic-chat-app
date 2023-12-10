@@ -51,15 +51,34 @@ export default function ChatBox() {
                 height: '100%', 
                 width: '100%' 
             }}
-        >
-      
-            <Box sx={{ height: 'calc(100% - 60px)', overflowY: 'auto' }}>
+            >
+            <Box 
+                sx={{ 
+                    height: 'calc(100% - 60px)', 
+                    overflowY: 'auto' 
+                }}
+                >
                 {messages.map((message, index) => (
-                <MessageItem text={message.text} user={message.user} timestamp={message.timestamp} key={index} />
+                    <MessageItem 
+                        text={message.text} 
+                        user={message.user} 
+                        timestamp={message.timestamp} 
+                        key={index} 
+                    />
                 ))}
                 <div ref={messagesEndRef} />
-            </Box>
-            <Box sx={{ backgroundColor: 'background.default',position: 'sticky', bottom: 0, display: 'flex', justifyContent: 'flex-end', marginTop: 2, zIndex: 999, width:  '100%'  }}>                
+            </Box>  
+            <Box sx={{ 
+                    backgroundColor: 'background.default',
+                    position: 'sticky', 
+                    bottom: 0, 
+                    display: 'flex', 
+                    justifyContent: 'flex-end', 
+                    marginTop: 2, 
+                    zIndex: 999, 
+                    width:  '100%'  
+                }}
+                >                
                     <BasicInput
                             label=''
                             variant='outlined'
@@ -75,7 +94,7 @@ export default function ChatBox() {
                         chat='yes'
                         disabled={inputValue.trim() === ''} 
                     />
-                </Box>
+            </Box>
         </Box>
     );
 }

@@ -137,6 +137,7 @@ export default function LoginForm({ onLogin, onSignup, onUpdate, formVariant  }:
             buttonText='Valider' 
             buttonVariant='contained' 
             buttonColor='primary' 
+            buttonWidth= {40}
         />
     </Box>
   );
