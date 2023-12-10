@@ -1,0 +1,29 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  email String [unique, not null]
+  name String
+  password String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [not null]
+  sended_messages Message [not null]
+  received_messages Message [not null]
+}
+
+Table Message {
+  id String [pk]
+  text String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [not null]
+  sender User [not null]
+  sender_id String [not null]
+  receiver User [not null]
+  receiver_id String [not null]
+}
+
+Ref: Message.sender_id > User.id
+
+Ref: Message.receiver_id > User.id
