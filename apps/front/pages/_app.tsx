@@ -38,7 +38,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
         paddingTop: paddingTopValue, 
         paddingLeft: isDesktop ? drawerWidth : 0,
         minHeight: '100vh',
-        overflow: 'hidden'
       }}>
         <Header auth={auth} onProfileClick={toggleProfile}  />
         <Box sx={{
