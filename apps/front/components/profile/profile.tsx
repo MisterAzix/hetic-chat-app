@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Button, TextField, Avatar } from '@mui/material';
 import AvatarComponent from './pfp';
 import LoginForm from '../forms/LoginForm';
+import { BasicButton } from '../forms/Button';
 
 export default function ProfilePage() {
   const [user, setUser] = useState({
@@ -9,24 +10,64 @@ export default function ProfilePage() {
     email: 'johndoe@example.com',
   });
 
-  const handleLogout = () => {
-  };
+  const handleLogout = () => {};
 
-  const handleDeleteAccount = () => {
-  };
+  const handleDeleteAccount = () => {};
 
-  const handleUpdateInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+  const handleUpdateInfo = (updatedInfo: {
+    name?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  }) => {
+    setUser({ ...user, ...updatedInfo });
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: 1,
+        height: 1,
+        paddingLeft: '10%',
+        paddingRight: '10%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        alignItems: 'flex-start',
+      }}
+    >
       <AvatarComponent alt={user.name} name={user.name} />
-      <Typography variant="h6">{user.name}</Typography>
-      <Typography variant="body1">{user.email}</Typography>
-      <LoginForm variant='update'/>
-      <Button onClick={handleLogout}>Se déconnecter</Button>
-      <Button onClick={handleDeleteAccount}>Supprimer le compte</Button>
+      <Typography variant="h1">{user.name}</Typography>
+      <Typography
+        sx={{
+          marginBottom: '5vh',
+        }}
+        variant="h2"
+      >
+        {user.email}
+      </Typography>
+      <LoginForm formVariant="update" onUpdate={handleUpdateInfo} />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
+        <BasicButton
+          onClick={handleLogout}
+          buttonText="Se déconnecter"
+          buttonVariant="outlined"
+          chat="no"
+          buttonColor="primary"
+        />
+        <BasicButton
+          onClick={handleDeleteAccount}
+          buttonText="Supprimer le compte"
+          buttonVariant="text"
+          chat="no"
+          buttonColor="primary"
+        />
+      </Box>
     </Box>
   );
 }

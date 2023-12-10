@@ -11,13 +11,17 @@ import { Box } from '@mui/material';
 import ProfilePage from '../components/profile/profile';
 
 function CustomApp({ Component, pageProps }: AppProps) {
-  const apiUrl = 'http://localhost:3000/api';
-  console.log(apiUrl);
   const [auth, setAuth] = useState<boolean>(false);
   const appBarHeight = theme.mixins.toolbar.minHeight;
+  const paddingTopValue =
+    typeof appBarHeight === 'number'
+      ? appBarHeight + 30
+      : `calc(${appBarHeight} + 10px)`;
+
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
   const drawerWidth = 240;
   const [showProfile, setShowProfile] = useState(false);
+  const apiUrl = 'http://localhost:3000/api';
 
   const Login = () => {
     console.log('login');
@@ -52,7 +56,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
       <main
         style={{
-          paddingTop: appBarHeight,
+          paddingTop: paddingTopValue,
           paddingLeft: isDesktop ? drawerWidth : 0,
           minHeight: '100vh',
           overflow: 'hidden',
@@ -60,11 +64,13 @@ function CustomApp({ Component, pageProps }: AppProps) {
       >
         <Header auth={auth} onProfileClick={toggleProfile} />
         <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="100vh"
-          width="100%"
+          sx={{
+            display: 'flex',
+            width: 1,
+            height: 1,
+            maxHeight: 1,
+            minHeight: 1,
+          }}
         >
           {auth ? (
             showProfile ? (
@@ -73,7 +79,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
               <ChatBox />
             )
           ) : (
-            <LoginForm variant="signup" onLogin={Login} onSignup={SignUp} />
+            <LoginForm formVariant="login" onLogin={Login} onSignup={SignUp} />
           )}
         </Box>
       </main>

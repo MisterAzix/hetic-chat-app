@@ -11,16 +11,16 @@ interface BasicButtonProps {
 }
 
 export function BasicButton(props: BasicButtonProps) {
-  const { buttonText, buttonVariant, onClick, buttonColor, chat, disabled } = props;
+  const { buttonText, buttonVariant, onClick, buttonColor, chat, disabled } =
+    props;
 
   const buttonContent = chat === 'yes' ? <SendIcon /> : buttonText;
 
   return (
     <Button
       variant={buttonVariant}
-      color={buttonColor}
       onClick={onClick}
-      sx={{ color: 'white' }}
+      sx={{ color: { buttonColor } }}
       disabled={disabled}
     >
       {buttonContent}

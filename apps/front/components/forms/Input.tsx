@@ -11,19 +11,22 @@ interface BasicInputProps {
 
 export default function BasicInput(props: BasicInputProps) {
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && !event.shiftKey) { 
-        event.preventDefault(); 
-       
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
     }
-};
+  };
   return (
     <TextField
-      sx={{ flexGrow: 1, marginRight: 1 }} 
+      sx={{
+        flexGrow: 1,
+        minWidth: '40%',
+        marginRight: 1,
+      }}
       className="standard-basic"
       label={props.label !== '' ? props.label : undefined}
       variant={props.variant || 'standard'}
       inputRef={props.forwardedRef}
-      value={props.value} 
+      value={props.value}
       onChange={props.onChange}
     />
   );
