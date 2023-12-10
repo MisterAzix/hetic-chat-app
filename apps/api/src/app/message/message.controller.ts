@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MessageService } from './message.service';
-import { CreateMessageDto } from './dtos';
+import { CreateMessageCommand } from './commands';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Message')
@@ -24,7 +24,7 @@ export class MessageController {
   }
 
   @Post()
-  createMessage(@Body() data: CreateMessageDto) {
+  createMessage(@Body() data: CreateMessageCommand) {
     return this.messageService.createMessage(data);
   }
 }

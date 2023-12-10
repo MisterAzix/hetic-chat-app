@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 
-export class RegisterDto {
+export class UpdateUserDto {
   fromDomain(user: User): Omit<User, 'password'> {
     return {
       id: user.id,

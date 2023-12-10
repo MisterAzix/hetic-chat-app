@@ -1,8 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto } from './dtos';
+import { LoginCommand, RegisterCommand } from './commands';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from './decorators';
+import { RegisterDto } from './dtos';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -11,13 +12,15 @@ export class AuthController {
 
   @Public()
   @Post('register')
-  register(@Body() data: RegisterDto) {
-    return this.authService.register(data);
+  async register(@Body() data: RegisterCommand) {
+    const user = await this.authService.register(data);
+
+    return new RegisterDto().fromDomain(user);
   }
 
   @Public()
   @Post('login')
-  login(@Body() data: LoginDto) {
+  async login(@Body() data: LoginCommand) {
     return this.authService.login(data);
   }
 }

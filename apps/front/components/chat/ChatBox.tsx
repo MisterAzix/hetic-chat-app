@@ -60,7 +60,6 @@ export default function ChatBox() {
                         forwardedRef={inputRef}
                         value={inputValue}
                         onChange={handleInputChange} 
-                        onKeyPress={handleKeyPress}
                 />
                 <BasicButton
                     buttonVariant='contained'

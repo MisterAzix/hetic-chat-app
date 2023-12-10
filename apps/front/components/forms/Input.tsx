@@ -7,16 +7,30 @@ interface BasicInputProps {
   variant?: 'standard' | 'filled' | 'outlined';
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (event: React.KeyboardEvent) => void;
 }
 
 export default function BasicInput(props: BasicInputProps) {
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' && !event.shiftKey) { 
+        event.preventDefault(); 
+       
+    }
+};
   const { label, variant, forwardedRef, value, onChange, onKeyPress } = props;
 
   return (
     <TextField
       sx={{ flexGrow: 1, marginRight: 1 }} 
+      sx={{ flexGrow: 1, marginRight: 1 }} 
       className="standard-basic"
+      label={props.label !== '' ? props.label : undefined}
+      variant={props.variant || 'standard'}
+      inputRef={props.forwardedRef}
+      value={props.value} 
+      onChange={props.onChange}
       label={label !== '' ? label : undefined}
       variant={variant || 'standard'}
       inputRef={forwardedRef}

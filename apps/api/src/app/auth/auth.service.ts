@@ -25,7 +25,7 @@ export class AuthService {
 
   async register(
     registerData: Pick<User, 'email' | 'password'>
-  ): Promise<Omit<User, 'password'>> {
+  ): Promise<User> {
     const password = await bcrypt.hash(
       registerData.password,
       this.configService.get('PASSWORD_SALT_ROUND')
@@ -37,11 +37,10 @@ export class AuthService {
     if (userExists) {
       throw new ConflictException(AuthError.EMAIL_ALREADY_EXISTS);
     }
-    const user = await this.userService.createUser({
+    return this.userService.createUser({
       ...registerData,
       password,
     });
-    return this.excludeUserKeys(user, ['password']);
   }
 
   async login(loginData: Pick<User, 'email' | 'password'>): Promise<string> {
@@ -58,14 +57,5 @@ export class AuthService {
     return this.jwtService.sign({
       sub: user.id,
     });
-  }
-
-  private excludeUserKeys<User, Key extends keyof User>(
-    user: User,
-    keys: Key[]
-  ): Omit<User, Key> {
-    return Object.fromEntries(
-      Object.entries(user).filter(([key]) => !keys.includes(key as Key))
-    ) as Omit<User, Key>;
   }
 }

@@ -2,7 +2,9 @@ import { Prisma } from '@prisma/client';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateMessageDto implements Prisma.MessageUncheckedCreateInput {
+export class CreateMessageCommand
+  implements Prisma.MessageUncheckedCreateInput
+{
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
