@@ -24,10 +24,13 @@ export class UserService {
     return user;
   }
 
-  async getUserByEmail(email: string): Promise<User> {
+  async getUserByEmail(
+    email: string,
+    verification: boolean = false
+  ): Promise<User> {
     const user = await this.prisma.user.findFirst({ where: { email } });
 
-    if (!user) {
+    if (!user && !verification) {
       throw new NotFoundException(UserError.USER_NOT_FOUND);
     }
 

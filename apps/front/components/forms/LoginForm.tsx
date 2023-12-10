@@ -5,8 +5,8 @@ import { BasicButton } from './Button';
 
 interface FormProps {
   formVariant: 'login' | 'signup' | 'update';
-  onLogin?: () => void;
-  onSignup?: (email: string, password: string) => void;
+  onLogin?: (email: string, password: string) => void;
+  onSignup?: (email: string, password: string, name: string) => void;
   onUpdate?: (updatedInfo: {
     name?: string;
     email?: string;
@@ -41,9 +41,9 @@ export default function LoginForm({
 
   const handleSubmit = () => {
     if (currentFormVariant === 'login' && onLogin) {
-      onLogin();
+      onLogin(email, password);
     } else if (currentFormVariant === 'signup' && onSignup) {
-      onSignup(email, password);
+      onSignup(email, password, name);
     } else if (currentFormVariant === 'update' && onUpdate) {
       onUpdate({ name, email, password, confirmPassword });
     }

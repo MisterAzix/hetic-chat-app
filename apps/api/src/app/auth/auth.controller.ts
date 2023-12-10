@@ -13,7 +13,6 @@ export class AuthController {
   @Public()
   @Post('register')
   async register(@Body() data: RegisterCommand) {
-    console.log('regitering', data);
     const user = await this.authService.register(data);
 
     return new RegisterDto().fromDomain(user);
