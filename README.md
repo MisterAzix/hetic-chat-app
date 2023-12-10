@@ -1,5 +1,24 @@
 # 📢 Hetic Chat App 📢
 
+## 📝️ Table of contents 📝
+
+- [ℹ️ Introduction ℹ️](#-introduction-)
+  - [Conception de l'interface](#conception-de-linterface)
+  - [Conception de la base de données](#conception-de-la-base-de-données)
+- [⚙️ Installation ⚙️](#️-installation-️)
+- [🚀 Start the project 🚀](#-start-the-project-)
+  - [With NX Console](#with-nx-console)
+  - [With the terminal](#with-the-terminal)
+- [👤️ Authors 👤](#️-authors-️)
+
+## ℹ️ Introduction ℹ️
+
+### Conception de l'interface
+[Lien Figma](https://www.figma.com/file/6n4KUkw5VNZ1YzjTAZG96r/hetic-chat-app?type=design&node-id=6603%3A6475&mode=design&t=PMYfe7kjlt8znZG9-1)
+
+### Conception de la base de données
+<img width="639" alt="image" src="https://github.com/MisterAzix/hetic-chat-app/assets/40914400/34d06bd4-f372-44a4-bcd6-b0b72025e44a">
+
 ## ⚙️ Installation ⚙️
 
 1. Clone the repository to your local machine:
