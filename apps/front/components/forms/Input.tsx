@@ -18,7 +18,11 @@ export default function BasicInput(props: BasicInputProps) {
 };
   return (
     <TextField
-      sx={{ flexGrow: 1, marginRight: 1 }} 
+      sx={{ 
+        flexGrow: 1,
+        minWidth: '40%', 
+        marginRight: 1 
+    }} 
       className="standard-basic"
       label={props.label !== '' ? props.label : undefined}
       variant={props.variant || 'standard'}

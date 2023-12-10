@@ -13,6 +13,8 @@ import ProfilePage from '../components/profile/profile';
 function CustomApp({ Component, pageProps }: AppProps) {
   var [auth, setAuth] = useState<boolean>(false);
   const appBarHeight = theme.mixins.toolbar.minHeight;
+  const paddingTopValue = typeof appBarHeight === 'number' ? appBarHeight + 30 : `calc(${appBarHeight} + 10px)`;
+
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
   const drawerWidth = 240; 
   const [showProfile, setShowProfile] = useState(false);
@@ -33,14 +35,20 @@ function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <main style={{ 
-        paddingTop: appBarHeight, 
+        paddingTop: paddingTopValue, 
         paddingLeft: isDesktop ? drawerWidth : 0,
         minHeight: '100vh',
         overflow: 'hidden'
       }}>
         <Header auth={auth} onProfileClick={toggleProfile}  />
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" width="100%" >
-        {auth ? (showProfile ? <ProfilePage /> : <ChatBox />) : <LoginForm variant='login'onLogin={Login} onSignup={SignUp} />}
+        <Box sx={{
+          display: 'flex',
+          width:1,
+          height:1,
+          maxHeight: 1,
+          minHeight: 1,
+        }}>
+        {auth ? (showProfile ? <ProfilePage /> : <ChatBox />) : <LoginForm formVariant='login' onLogin={Login} onSignup={SignUp} />}
         </Box>
         
       </main>

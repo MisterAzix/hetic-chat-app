@@ -18,9 +18,8 @@ export function BasicButton(props: BasicButtonProps) {
   return (
     <Button
       variant={buttonVariant}
-      color={buttonColor}
       onClick={onClick}
-      sx={{ color: 'white' }}
+      sx={{ color: {buttonColor} }}
       disabled={disabled}
     >
       {buttonContent}
