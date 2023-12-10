@@ -144,6 +144,7 @@ export default function LoginForm({
         buttonText="Valider"
         buttonVariant="contained"
         buttonColor="primary"
+        buttonWidth={40}
       />
     </Box>
   );

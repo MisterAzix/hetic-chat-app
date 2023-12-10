@@ -10,9 +10,18 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box } from '@mui/material';
 import ProfilePage from '../components/profile/profile';
 
+interface Message {
+  text: string;
+  user: string;
+  timestamp: Date;
+}
+
 function CustomApp({ Component, pageProps }: AppProps) {
-  let userId = '';
+  const [userId, setUserId] = useState('');
   const [auth, setAuth] = useState<boolean>(false);
+  const [messages, setMessages] = useState<Message[]>([
+    { text: '', user: 'user1', timestamp: new Date() },
+  ]);
   const appBarHeight = theme.mixins.toolbar.minHeight;
   const paddingTopValue =
     typeof appBarHeight === 'number'
@@ -46,11 +55,12 @@ function CustomApp({ Component, pageProps }: AppProps) {
       }).then((res) => res.text());
       access_token = signIn;
       const tokenPayload = parseJwt(access_token);
-      userId = tokenPayload.sub;
+      setUserId(tokenPayload.sub);
     } catch (error) {
       console.error(error);
     }
     setAuth(true);
+    getMessages();
   };
   const SignUp = async (email: string, password: string, name: string) => {
     console.log('SignUp');
@@ -75,6 +85,52 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
     // setAuth(true);
   };
+
+  const getMessages = async () => {
+    const fetchedMessages = await fetch(
+      `${apiUrl}/message/receiver/d685ecf9-8c83-474b-85fa-daa0ebb795cf`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    ).then((res) => res.json());
+    const checkedMessages = fetchedMessages.map((message: any) => {
+      let user = 'user1';
+      if (message.receiver == userId) {
+        user = 'user2';
+      }
+      return {
+        text: message.text,
+        user: user,
+        timestamp: message.created_at,
+      };
+    });
+    console.log(checkedMessages);
+
+    setMessages(checkedMessages);
+    console.log(messages);
+  };
+
+  const postMessage = async (textMessage: string) => {
+    const data = {
+      sender_id: userId,
+      text: textMessage,
+      receiver_id: 'd685ecf9-8c83-474b-85fa-daa0ebb795cf',
+    };
+    console.log(data);
+
+    const post = await fetch(`${apiUrl}/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((res) => res.json());
+    console.log(post);
+  };
+
   const toggleProfile = () => {
     setShowProfile(!showProfile);
   };
@@ -89,7 +145,6 @@ function CustomApp({ Component, pageProps }: AppProps) {
           paddingTop: paddingTopValue,
           paddingLeft: isDesktop ? drawerWidth : 0,
           minHeight: '100vh',
-          overflow: 'hidden',
         }}
       >
         <Header auth={auth} onProfileClick={toggleProfile} />
@@ -105,8 +160,16 @@ function CustomApp({ Component, pageProps }: AppProps) {
           {auth ? (
             showProfile ? (
               <ProfilePage />
+            ) : messages ? (
+              <ChatBox
+                chats={[
+                  ...messages,
+                  { text: 'oui', user: 'user2', timestamp: new Date() },
+                ]}
+                onMessageSent={postMessage}
+              />
             ) : (
-              <ChatBox />
+              <p>no messages ...</p>
             )
           ) : (
             <LoginForm formVariant="login" onLogin={Login} onSignup={SignUp} />

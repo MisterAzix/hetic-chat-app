@@ -51,6 +51,9 @@ export default function ProfilePage() {
         sx={{
           display: 'flex',
           flexDirection: 'row',
+          width: '40%',
+          alignItems: 'center',
+          justifyContent: 'space-around',
         }}
       >
         <BasicButton

@@ -4,15 +4,16 @@ import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import AvatarComponent from '../profile/pfp';
-
+import { theme } from '../../style/theme';
 
 
 export default function MessagesList() {
+  const appBarHeight = theme.mixins.toolbar.minHeight;
+  const paddingTopValue = typeof appBarHeight === 'number' ? appBarHeight + 30 : `calc(${appBarHeight} + 10px)`;
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background' }}>
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background', paddingTop: '80px'}}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <AvatarComponent alt="Remy Sharp" name="Remy Sharp" />
