@@ -4,51 +4,73 @@ import { Button, Typography, Divider, Box, Link } from '@mui/material';
 import { BasicButton } from './Button';
 
 interface FormProps {
-  variant: 'login' | 'signup' | 'update';
-  onLogin?: () => void;
-  onSignup?: () => void;
-  onUpdate?: () => void;
+  formVariant: 'login' | 'signup' | 'update';
+  onLogin?: (email: string, password: string) => void;
+  onSignup?: (email: string, password: string, name: string) => void;
+  onUpdate?: (updatedInfo: {
+    name?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  }) => void;
 }
 
-export default function LoginForm({ variant, onLogin, onSignup, onUpdate }: FormProps) {
+export default function LoginForm({
+  onLogin,
+  onSignup,
+  onUpdate,
+  formVariant,
+}: FormProps) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
+  const [currentFormVariant, setFormVariant] = useState<
+    'login' | 'signup' | 'update'
+  >(formVariant);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
-  const [formVariant, setFormVariant] = useState<'login' | 'signup'>('login');
 
   const toggleFormVariant = () => {
-    setFormVariant(formVariant === 'login' ? 'signup' : 'login');
+    setFormVariant(currentFormVariant === 'login' ? 'signup' : 'login');
   };
 
   const handleSubmit = () => {
-    if (variant === 'login' && onLogin) {
-      onLogin();  
-    } else if (variant === 'signup' && onSignup) {
-      onSignup(); 
-    }
-    else if (variant === 'update' && onUpdate) {
-      onUpdate(); 
+    if (currentFormVariant === 'login' && onLogin) {
+      onLogin(email, password);
+    } else if (currentFormVariant === 'signup' && onSignup) {
+      onSignup(email, password, name);
+    } else if (currentFormVariant === 'update' && onUpdate) {
+      onUpdate({ name, email, password, confirmPassword });
     }
   };
 
   return (
     <Box
       component="form"
-      display="flex"
-      flexDirection="column"
-      alignItems="start"
-      justifyContent="space-around"
-      sx={{width:1, height:1}}
+      sx={{
+        width: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        height: 'fill',
+        gap: 3,
+        paddingLeft: 1 / 5,
+        paddingRight: 1 / 5,
+      }}
     >
-      {variant === 'login' && (<Typography variant="h1">Connexion</Typography>)}
-      {variant === 'signup' && (<Typography variant="h1">Inscription</Typography>)}
-      {variant === 'signup' || variant === 'update' && (
+      {currentFormVariant === 'login' && (
+        <Typography variant="h1">Connexion</Typography>
+      )}
+      {currentFormVariant === 'signup' && (
+        <Typography variant="h1">Inscription</Typography>
+      )}
+      {(currentFormVariant === 'signup' || currentFormVariant === 'update') && (
         <BasicInput
           label="Nom"
           forwardedRef={nameRef}
@@ -71,7 +93,7 @@ export default function LoginForm({ variant, onLogin, onSignup, onUpdate }: Form
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      {variant === 'signup' || variant === 'update' && (
+      {(currentFormVariant === 'signup' || currentFormVariant === 'update') && (
         <BasicInput
           label="Confirmation de mot de passe"
           forwardedRef={confirmPasswordRef}
@@ -80,15 +102,50 @@ export default function LoginForm({ variant, onLogin, onSignup, onUpdate }: Form
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       )}
-      {variant === 'login' && (
-        <Typography variant="body1">Pas de compte ?<span onClick={toggleFormVariant}>Créez-en un</span></Typography>
-      )
-      }
-      {variant === 'signup' && (
-        <Typography variant="body1">Vous avez déjà un compte ?<span onClick={toggleFormVariant}>Connectez-vous</span></Typography>
-      )
-      }
-        <BasicButton chat='no' onClick={handleSubmit} buttonText='Valider' buttonVariant='contained' buttonColor='primary' />
+      {currentFormVariant === 'login' && (
+        <Typography variant="body1">
+          Pas de compte ?
+          <Box
+            component="span"
+            sx={{
+              cursor: 'pointer',
+              color: 'text.primary', // Couleur par défaut
+              '&:hover': {
+                color: 'primary.main', // Couleur au survol
+              },
+            }}
+            onClick={toggleFormVariant}
+          >
+            Créez-en un
+          </Box>
+        </Typography>
+      )}
+      {currentFormVariant === 'signup' && (
+        <Typography variant="body1">
+          Vous avez déjà un compte ?
+          <Box
+            component="span"
+            sx={{
+              cursor: 'pointer',
+              color: 'text.primary', // Couleur par défaut
+              '&:hover': {
+                color: 'primary.main', // Couleur au survol
+              },
+            }}
+            onClick={toggleFormVariant}
+          >
+            Connectez-vous
+          </Box>
+        </Typography>
+      )}
+      <BasicButton
+        chat="no"
+        onClick={handleSubmit}
+        buttonText="Valider"
+        buttonVariant="contained"
+        buttonColor="primary"
+        buttonWidth={40}
+      />
     </Box>
   );
 }

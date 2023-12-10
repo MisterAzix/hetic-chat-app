@@ -18,8 +18,10 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MessagesList from './userlist';
+import MessagesList from './messagelist';
 import { useRef } from 'react';
+import { theme } from '../../style/theme';
+
 const drawerWidth = 240;
 const navItems = ['Home'];
 
@@ -31,7 +33,7 @@ interface HeaderProps {
 export default function DrawerAppBar({ auth, onProfileClick }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
+  
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -114,19 +116,18 @@ export default function DrawerAppBar({ auth, onProfileClick }: HeaderProps) {
         </Toolbar>
       </AppBar>
       {auth &&(
-        <nav >
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        <nav>
+              <Drawer
+                variant="permanent"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
 
-          }}
-          open
-        >
+                }}
+                open
+              >
           <MessagesList/>
-        </Drawer>
-       
+        </Drawer>   
       </nav>
       )}
     </Box>

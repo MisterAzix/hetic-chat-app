@@ -26,14 +26,13 @@ export class AuthService {
   async register(
     registerData: Pick<User, 'email' | 'password'>
   ): Promise<User> {
-    const password = await bcrypt.hash(
-      registerData.password,
-      this.configService.get('PASSWORD_SALT_ROUND')
-    );
+    const password = await bcrypt.hash(registerData.password, 12);
 
     const userExists = await this.userService.getUserByEmail(
-      registerData.email
+      registerData.email,
+      true
     );
+
     if (userExists) {
       throw new ConflictException(AuthError.EMAIL_ALREADY_EXISTS);
     }
