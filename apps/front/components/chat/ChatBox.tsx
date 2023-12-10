@@ -55,7 +55,8 @@ export default function ChatBox() {
             <Box 
                 sx={{ 
                     height: 'calc(100% - 60px)', 
-                    overflowY: 'auto' 
+                    overflowY: 'auto', 
+                    paddingX:'2%'
                 }}
                 >
                 {messages.map((message, index) => (
