@@ -79,16 +79,15 @@ export default function LoginForm({
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      {variant === 'signup' ||
-        (variant === 'update' && (
-          <BasicInput
+      {(variant === 'signup' || variant === 'update') && (
+        <BasicInput
             label="Confirmation de mot de passe"
             forwardedRef={confirmPasswordRef}
             variant="outlined"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        ))}
+        />
+        )}
       {variant === 'login' && (
         <Typography variant="body1">
           Pas de compte ?<span onClick={toggleFormVariant}>Créez-en un</span>
